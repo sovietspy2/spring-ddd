@@ -1,6 +1,5 @@
-package com.example.springddd.customer.model;
+package com.example.springddd.repository.customer;
 
-import com.example.springddd.customer.model.key.CustomerAddressCompositeKey;
 import lombok.*;
 
 import javax.persistence.*;

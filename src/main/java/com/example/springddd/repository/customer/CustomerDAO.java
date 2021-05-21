@@ -1,6 +1,5 @@
-package com.example.springddd.customer;
+package com.example.springddd.repository.customer;
 
-import com.example.springddd.customer.model.CustomerProjection;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

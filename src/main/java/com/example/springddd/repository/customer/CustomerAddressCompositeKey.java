@@ -1,4 +1,4 @@
-package com.example.springddd.customer.model.key;
+package com.example.springddd.repository.customer;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

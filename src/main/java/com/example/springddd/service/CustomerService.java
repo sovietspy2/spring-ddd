@@ -1,12 +1,13 @@
 package com.example.springddd.service;
 
-import com.example.springddd.customer.CustomerRepository;
-import com.example.springddd.customer.domain.CustomerAddressAggregate;
-import com.example.springddd.customer.domain.CustomerAggregate;
+import com.example.springddd.repository.customer.CustomerRepository;
+import com.example.springddd.domain.customer.CustomerAddress;
+import com.example.springddd.domain.customer.Customer;
 import com.example.springddd.event.CustomerNameChangeEvent;
 import lombok.AllArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @AllArgsConstructor
@@ -17,7 +18,7 @@ public class CustomerService {
     private final ApplicationEventPublisher applicationEventPublisher;
 
 
-    public CustomerAggregate getCustomer(Integer id) {
+    public Customer getCustomer(Integer id) {
         return customerRepository.getCustomerById(1);
     }
 
@@ -26,27 +27,27 @@ public class CustomerService {
         applicationEventPublisher.publishEvent(new CustomerNameChangeEvent(this, name, id));
     }
 
+    @Transactional
     public void changeCustomerName(Integer id, String name) {
 
-        CustomerAggregate customerAggregate = customerRepository.getCustomerById(id);
+        Customer customer = customerRepository.getCustomerById(id);
 
-        customerAggregate.changeName(name);
-
-
-        customerRepository.saveCustomer(customerAggregate);
+        customer.changeName(name);
 
 
+        customerRepository.saveCustomer(customer);
 
+        applicationEventPublisher.publishEvent(new CustomerNameChangeEvent(this, name, customer.getId()));
     }
 
-    public void addNewAddressToCustomer(CustomerAddressAggregate address, Integer customerId) {
+    public void addNewAddressToCustomer(CustomerAddress address, Integer customerId) {
 
-        CustomerAggregate customerAggregate = customerRepository.getCustomerById(customerId);
+        Customer customer = customerRepository.getCustomerById(customerId);
 
-        customerAggregate.addCustomerAddress(address);
+        customer.addCustomerAddress(address);
 
 
-        customerRepository.saveCustomer(customerAggregate);
+        customerRepository.saveCustomer(customer);
 
 
     }

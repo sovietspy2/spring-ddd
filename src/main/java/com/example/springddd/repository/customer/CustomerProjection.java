@@ -1,4 +1,4 @@
-package com.example.springddd.customer.model;
+package com.example.springddd.repository.customer;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
