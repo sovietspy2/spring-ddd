@@ -1,0 +1,14 @@
+logging:
+  level:
+    org:
+      springframework: DEBUG
+server:
+  port: 8080
+spring:
+  datasource:
+    password: ${password}
+    url: ${url}
+    username: ${user}
+  sql:
+    init:
+      platform: postgres
